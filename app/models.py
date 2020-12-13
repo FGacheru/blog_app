@@ -1,7 +1,6 @@
 from . import db
 
 
-
 class User(UserMixin,db.Model):
     __tablename__ = 'users'
 
@@ -47,12 +46,41 @@ class Role(db.Model):
         return f'User {self.name}
     
     
+class Views(db.Model):
+    __tablename__ = 'views'
+
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
+    opinion_title = db.Column(db.String(255), index=True)
+    description = db.Column(db.String(255), index=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+    
+
+    def save_views(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_views(cls, id):
+        views = Post.query.filter_by(id=id).all()
+        return views
+
+    @classmethod
+    def get_all_views(cls):
+        views = Views.query.order_by('-id').all()
+        return views
+
+    def __repr__(self):
+        return f'Posts {self.views_title}'
+    
+    
 class Comments(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     comment = db.Column(db.String(255))
     date_posted = db.Column(db.DateTime(250), default=datetime.utcnow)
-    pitches_id = db.Column(db.Integer, db.ForeignKey("blogs.id"))
+    views_id = db.Column(db.Integer, db.ForeignKey("views.id"))
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
 
@@ -62,8 +90,12 @@ class Comments(db.Model):
 
     @classmethod
     def get_comment(cls,id):
-        comments = Comments.query.filter_by(pitches_id=id).all()
+        comments = Comments.query.filter_by(views_id=id).all()
         return comments
+        
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()    
 
     def __repr__(self):
         return f"Comments('{self.comment}', '{self.date_posted}')"
