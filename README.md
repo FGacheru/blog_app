@@ -13,3 +13,8 @@ This is Web Application where one can create and share their opinions. One can a
 * HTML5
 * CSS
 * Python
+## Support and contact details
+I would like to give credit to my Technical mentor for the guidance he gave me towards the development of this web.
+### License
+* Licensed under the MIT license
+Copyright (c) [2020] (Francis Gacheru)
