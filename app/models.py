@@ -1,5 +1,12 @@
+from werkzeug.security import generate_password_hash,check_password_hash
 from . import db
+from flask_login import UserMixin
+from . import login_manager
+from datetime import datetime
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 class User(UserMixin,db.Model):
     __tablename__ = 'users'
@@ -12,7 +19,8 @@ class User(UserMixin,db.Model):
     profile_pic_path = db.Column(db.String())
     password_secure = db.Column(db.String(255))
     
-    pitch = db.relationship('Comments', backref='author', lazy='dynamic')
+    comments = db.relationship('Comments', backref='title', lazy='dynamic')
+    views = db.relationship('Views', backref='username', lazy='dynamic')
 
     def __repr__(self):
         return f'User {self.username}'
@@ -43,7 +51,7 @@ class Role(db.Model):
     users = db.relationship('User',backref = 'role',lazy="dynamic")
 
     def __repr__(self):
-        return f'User {self.name}
+        return f'User {self.name}'
     
     
 class Views(db.Model):
@@ -51,7 +59,7 @@ class Views(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime, default=datetime.utcnow)
-    opinion_title = db.Column(db.String(255), index=True)
+    views_title = db.Column(db.String(255), index=True)
     description = db.Column(db.String(255), index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 

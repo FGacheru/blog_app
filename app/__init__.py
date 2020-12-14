@@ -41,7 +41,5 @@ def create_app(config_name):
     
     # configure UploadSet
     configure_uploads(app,photos)
-    
-
 
     return app
