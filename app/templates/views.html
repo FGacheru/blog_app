@@ -18,15 +18,16 @@
                 </div>
                 <div class="card-body">
                     <h2 class="quoted-author">{{ quote.author }}</h2>
-                    <p class="quoted-quote">{{ quote.quote }}</p>
+                    <p class="quoted-quote" style="font-weight: bold;">{{ quote.quote }}</p>
                 </div>
             </div>
         </div>
         <div class="col-md-8 pt-3">
             <div class="banner-post-banner">
                 <div class="container" id="post-banner">
-                    <h2 class="text-center text-white">Add Opinion</h2>
-                    <p class="text-center text-white">Add your Opinion or quote here..</p>
+                    <h2 class="text-center text-white" style="text-align: center;">Add View</h2>
+                    <br>
+                    <p class="text-center text-white" style="font-weight: bold;">Add your View here..</p>
                 </div>
             </div>
             {{ wtf.quick_form(form)}}

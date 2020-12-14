@@ -21,7 +21,7 @@ def login():
 
         flash('Invalid username or Password')
 
-    title = "Shitandi blog website"
+    title = "Gacheru's blog website"
     return render_template('auth/login.html',login_form = login_form,title=title, quote=quote)
 
 @auth.route('/register',methods = ["GET","POST"])

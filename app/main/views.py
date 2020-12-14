@@ -104,7 +104,7 @@ def comment(id):
     quote = get_quote()
     comm =Comments.get_comment(id)
     title = 'comments'
-    return render_template('comments.html',comment = comm,title = title,quote=quote)
+    return render_template('comments.html',comments = comm,title = title,quote=quote)
 
 @main.route('/new_comment/<int:views_id>', methods = ['GET','POST'])
 @login_required
@@ -123,3 +123,6 @@ def new_comment(views_id):
         return redirect(url_for('main.index'))
     title='New comment'
     return render_template('new_comment.html',title=title,comment_form = form,views_id=views_id,quote=quote)
+
+
+
