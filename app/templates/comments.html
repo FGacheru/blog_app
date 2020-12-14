@@ -1,4 +1,4 @@
-<!-- {% extends 'base.html'%}
+{% extends 'base.html'%}
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block styles%} {{ super() }}
@@ -24,7 +24,7 @@
     </div>
     <div class="col-md-8">
     <h3 class="text-center">COMMENTS </h2>
-      {% for comm in comment[::-1] %}
+      {% for comm in comments[::-1] %}
       <div class="container">
         <div class="row">
           <div class="col-md-4"></div>
@@ -36,7 +36,7 @@
                   <p class="card-text">{{comm.comment}}.</p>
                 </div>
                 <div class="card-footer bg-transparent border-success"><small>Publish
-                    date:{{comm.date.strftime('%Y-%m-%d')}}</small></div>
+                    date:{{comm.date_posted.strftime('%Y-%m-%d')}}</small></div>
               </div>
             </div>
           </div>
@@ -47,4 +47,4 @@
 </div>
 {% endfor %}
 </body>
-{% endblock %} -->
+{% endblock %}
